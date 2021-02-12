@@ -1,170 +1,104 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import './widgets/spinner/spinner.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
-void main() {
-  runApp(MyApp());
+import './blocs/auth/auth_bloc.dart';
+// import './blocs/login/login_bloc.dart';
+// import './lang/translate_preferences.dart';
+import './pages/pages.dart';
+import './services/auth_service.dart';
+// import './config/colors.dart';
+
+void main() async {
+  Bloc.observer = SimpleBlocObserver();
+  runApp(
+    MyApp(),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  final loaded = true;
-  final spinkit = SpinKitFoldingCube(
-    color: Colors.white,
-    size: 50.0,
-  );
+class MyApp extends StatefulWidget {
+  MyApp({Key key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Scaffold(
-        body: Container(
-            padding: EdgeInsets.only(top: 50, bottom: 50),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage("assets/images/bg.jpg"),
-              fit: BoxFit.cover,
-            )),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset('assets/images/logo.png'),
-                loaded
-                    ? SingleChildScrollView(
-                        child: Container(
-                          child: Column(children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 10),
-                              child: TextFormField(
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                                textAlign: TextAlign.center,
-                                cursorColor: Color(0xFFc3eae2),
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  focusColor: Colors.red,
-                                  labelText: "Email",
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  alignLabelWithHint: true,
-                                  fillColor: Colors.white10,
-                                  hintText: "eg. john@mail.com",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide:
-                                        BorderSide(color: Colors.white70),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide:
-                                        BorderSide(color: Colors.white70),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide:
-                                        BorderSide(color: Colors.white70),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 10),
-                              child: TextFormField(
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                                textAlign: TextAlign.center,
-                                obscureText: true,
-                                cursorColor: Color(0xFFc3eae2),
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  focusColor: Colors.red,
-                                  labelText: "Hasło",
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  alignLabelWithHint: true,
-                                  fillColor: Colors.white10,
-                                  // hintText: "eg. john@mail.com",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide:
-                                        BorderSide(color: Colors.white70),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide:
-                                        BorderSide(color: Colors.white70),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide:
-                                        BorderSide(color: Colors.white70),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            SizedBox(
-                              // height: 44,
-                              // width: 240,
-                              child: RaisedButton(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 50, vertical: 15),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0)),
-                                color: Color(0xFF38b89e),
-                                onPressed: () => print('Zaloguj'),
-                                child: Text(
-                                  'ZALOGUJ',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(text: 'Nie masz konta? '),
-                                  TextSpan(
-                                    text: 'Załóż konto',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () => print('Zarejestruj'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                          ]),
-                        ),
-                      )
-                    : SpinKitFoldingCube(
-                        size: 50,
-                        itemBuilder: (BuildContext context, int index) {
-                          return DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: index.isEven
-                                  ? Color(0xFF38b89e)
-                                  : Color(0xFFc3eae2),
-                            ),
-                          );
-                        },
-                      ),
-              ],
-            )),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<AuthService>(
+          create: (context) {
+            return AuthService();
+          },
+        ),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthBloc>(
+            create: (context) {
+              final authService = RepositoryProvider.of<AuthService>(context);
+              return AuthBloc(authService)..add(AuthSplashScreenOK());
+            },
+          ),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            // appBar: PreferredSize(
+            //   preferredSize: Size.fromHeight(0),
+            //   // child: AppBar(
+            //   //   elevation: 0,
+            //   //   backgroundColor: Colors.black,
+            //   // ),
+            // ),
+            body: BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                // if (state is AuthAuthentication) return Home();
+                if (state is AuthNotAuthentication) return Auth();
+                if (state is AuthSplashScreen) return SplashScreen();
+                return SplashScreen();
+              },
+            ),
+          ),
+        ),
       ),
     );
+  }
+}
+
+class SimpleBlocObserver extends BlocObserver {
+  @override
+  void onEvent(Bloc bloc, Object event) {
+    print(event);
+    super.onEvent(bloc, event);
+  }
+
+  @override
+  void onChange(Cubit cubit, Change change) {
+    print(change);
+    super.onChange(cubit, change);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    print(transition);
+    super.onTransition(bloc, transition);
+  }
+
+  @override
+  void onError(Cubit cubit, Object error, StackTrace stackTrace) {
+    print(error);
+    super.onError(cubit, error, stackTrace);
   }
 }

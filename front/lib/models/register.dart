@@ -1,32 +1,32 @@
 class RegisterData {
-  String email;
+  String id;
   String firstname;
   String lastname;
-  String password;
+  String gender;
   String birthdate;
 
   RegisterData({
-    this.email,
+    this.id,
     this.firstname,
     this.lastname,
-    this.password,
+    this.gender,
     this.birthdate,
   });
 
   RegisterData.fromJson(Map<String, dynamic> json) {
-    email = json['email'];
+    id = json['id'];
     firstname = json['firstname'];
     lastname = json['lastname'];
-    password = json['password'];
+    gender = json['gender'];
     birthdate = json['birthdate'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['email'] = this.email;
+    data['id'] = this.id;
     data['firstname'] = this.firstname;
     data['lastname'] = this.lastname;
-    data['password'] = this.password;
+    data['gender'] = this.gender;
     data['birthdate'] = this.birthdate;
     return data;
   }

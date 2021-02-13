@@ -11,6 +11,7 @@ class Input extends StatelessWidget {
   final bool obscure;
   final node;
   final double horizontalPadding;
+  final Function changeHandler;
 
   Input({
     @required this.labelText,
@@ -22,6 +23,7 @@ class Input extends StatelessWidget {
     this.node,
     this.obscure = false,
     this.horizontalPadding = 0,
+    this.changeHandler,
   });
 
   @override
@@ -30,33 +32,32 @@ class Input extends StatelessWidget {
       padding:
           EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 10),
       child: TextFormField(
-        style: TextStyle(color: textColor, fontSize: 18),
-        textAlign: TextAlign.center,
-        cursorColor: CustomColor.secondaryAccent,
-        obscureText: obscure,
-        decoration: InputDecoration(
-          filled: true,
-          focusColor: Colors.red,
-          labelText: labelText,
-          labelStyle: TextStyle(color: labelColor),
-          alignLabelWithHint: true,
-          fillColor: fillColor,
-          // hintText: "eg. john@mail.com",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: borderColor),
+          style: TextStyle(color: textColor, fontSize: 18),
+          textAlign: TextAlign.center,
+          cursorColor: CustomColor.secondaryAccent,
+          obscureText: obscure,
+          decoration: InputDecoration(
+            filled: true,
+            focusColor: Colors.red,
+            labelText: labelText,
+            labelStyle: TextStyle(color: labelColor),
+            alignLabelWithHint: true,
+            fillColor: fillColor,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: borderColor),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: borderColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: borderColor),
+            ),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: borderColor),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: borderColor),
-          ),
-        ),
-        onEditingComplete: () => node.nextFocus(),
-      ),
+          onEditingComplete: () => node.nextFocus(),
+          onChanged: (text) => changeHandler(text)),
     );
   }
 }

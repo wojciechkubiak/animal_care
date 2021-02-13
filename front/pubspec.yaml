@@ -38,6 +38,10 @@ dependencies:
   validators: ^2.0.1
   flutter_translate: ^1.6.0
   flutter_translate_annotations: ^1.0.1
+  uuid: ^2.2.2
+  rflutter_alert: ^1.1.0
+  toggle_switch: ^0.1.8
+  font_awesome_flutter: ^8.11.0
 
 dev_dependencies:
   flutter_test:

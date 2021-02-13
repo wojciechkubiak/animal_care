@@ -11,7 +11,10 @@ exports.sequelize_connect = new Sequelize(
     ssl: true,
     host: process.env.DB_HOST,
     dialectOptions: {
-      ssl: true
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
     }
   }
 );

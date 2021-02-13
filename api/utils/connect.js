@@ -8,6 +8,7 @@ exports.sequelize_connect = new Sequelize(
   process.env.DB_PASSWORD,
   {
     dialect: "postgres",
+    ssl: true,
     host: process.env.DB_HOST,
     dialectOptions: {
       ssl: true

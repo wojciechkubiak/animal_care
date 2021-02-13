@@ -1,12 +1,12 @@
 {
-  "name": "billing-panel-api",
+  "name": "animal-care",
   "version": "0.0.0",
   "description": "",
   "private": true,
-  "main": "app.js",
-  "web": "nodemon --exec babel-node ./bin/start",
+  "main": "./api/app.js",
+  "web": "nodemon --exec babel-node ./api/bin/start",
   "scripts": {
-    "start": "nodemon --exec babel-node ./bin/start",
+    "start": "nodemon --exec babel-node ./api/bin/start",
     "test": "echo \"Error: test not specified\" && exit 1"
   },
   "dependencies": {

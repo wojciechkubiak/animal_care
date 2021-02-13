@@ -11,7 +11,7 @@ abstract class DataAuthService extends ConfigService {
   Future<bool> getCurrent();
   Future<bool> logOut();
   Future<bool> authWithForm(String login, String password);
-  Future<bool> registerWithForm(Register register);
+  Future<bool> registerWithForm(RegisterData register);
   Future<bool> rememberWithForm(String state);
 }
 
@@ -57,7 +57,7 @@ class AuthService extends DataAuthService {
   }
 
   @override
-  Future<bool> registerWithForm(Register register) async {
+  Future<bool> registerWithForm(RegisterData register) async {
     try {
       return true;
     } catch (e) {

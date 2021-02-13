@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import '../../config/colors.dart';
 
 class Spinner extends StatelessWidget {
   @override
@@ -13,7 +14,9 @@ class Spinner extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return DecoratedBox(
           decoration: BoxDecoration(
-            color: index.isEven ? Color(0xFF38b89e) : Color(0xFFc3eae2),
+            color: index.isEven
+                ? CustomColor.mainAccent
+                : CustomColor.secondaryAccent,
           ),
         );
       },

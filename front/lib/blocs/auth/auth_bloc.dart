@@ -80,7 +80,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> _mapAppSplashScreenState(AuthSplashScreenOK event) async* {
     yield AuthSplashScreen();
     try {
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 5));
       if (await _AuthService.getCurrent()) {
         yield AuthAuthentication();
       } else {

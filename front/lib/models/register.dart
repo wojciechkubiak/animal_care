@@ -1,11 +1,11 @@
-class Register {
+class RegisterData {
   String email;
   String firstname;
   String lastname;
   String password;
   String birthdate;
 
-  Register({
+  RegisterData({
     this.email,
     this.firstname,
     this.lastname,
@@ -13,7 +13,7 @@ class Register {
     this.birthdate,
   });
 
-  Register.fromJson(Map<String, dynamic> json) {
+  RegisterData.fromJson(Map<String, dynamic> json) {
     email = json['email'];
     firstname = json['firstname'];
     lastname = json['lastname'];

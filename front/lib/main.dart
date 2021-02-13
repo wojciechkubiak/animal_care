@@ -7,11 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 import './blocs/auth/auth_bloc.dart';
+import './blocs/login/login_bloc.dart';
+
 // import './blocs/login/login_bloc.dart';
 // import './lang/translate_preferences.dart';
 import './pages/pages.dart';
 import './services/auth_service.dart';
-// import './config/colors.dart';
+import './config/colors.dart';
 
 void main() async {
   Bloc.observer = SimpleBlocObserver();
@@ -51,6 +53,12 @@ class _MyAppState extends State<MyApp> {
               return AuthBloc(authService)..add(AuthSplashScreenOK());
             },
           ),
+          BlocProvider<LoginBloc>(
+            create: (context) {
+              final authService = RepositoryProvider.of<AuthService>(context);
+              return LoginBloc(authService)..add(LoginLoaded());
+            },
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -62,13 +70,24 @@ class _MyAppState extends State<MyApp> {
             //   //   backgroundColor: Colors.black,
             //   // ),
             // ),
-            body: BlocBuilder<AuthBloc, AuthState>(
-              builder: (context, state) {
-                // if (state is AuthAuthentication) return Home();
-                if (state is AuthNotAuthentication) return Auth();
-                if (state is AuthSplashScreen) return SplashScreen();
-                return SplashScreen();
-              },
+            body: Theme(
+              data: Theme.of(context).copyWith(
+                primaryColor: Color(0xFFFF3661), //color of the main banner
+                accentColor: Color(
+                    0xFFFF3661), //color of circle indicating the selected date
+                buttonTheme: ButtonThemeData(
+                    textTheme: ButtonTextTheme
+                        .accent //color of the text in the button "OK/CANCEL"
+                    ),
+              ),
+              child: BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  // if (state is AuthAuthentication) return Home();
+                  if (state is AuthNotAuthentication) return Auth();
+                  if (state is AuthSplashScreen) return SplashScreen();
+                  return SplashScreen();
+                },
+              ),
             ),
           ),
         ),

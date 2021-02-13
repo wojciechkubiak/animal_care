@@ -22,7 +22,7 @@ class SplashScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: EdgeInsets.only(top: 75, bottom: 128),
+                margin: EdgeInsets.only(top: 25, bottom: 78),
                 height: 154,
                 width: 154,
                 child: Image.asset(

@@ -9,5 +9,8 @@ exports.sequelize_connect = new Sequelize(
   {
     dialect: "postgres",
     host: process.env.DB_HOST,
+    dialectOptions: {
+      ssl: true
+    }
   }
 );

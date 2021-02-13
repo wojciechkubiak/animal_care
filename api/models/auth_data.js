@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
-const { sequelize_dwh } = require("../utils/connect");
+const { sequelize_connect } = require("../utils/connect");
 
-const AuthData = sequelize_dwh.define(
+const AuthData = sequelize_connect.define(
   "AUTH_DATA",
   {
     id: {

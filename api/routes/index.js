@@ -1,7 +1,7 @@
 const path = require("path");
 const jwt = require("jsonwebtoken");
 
-import 'dotenv/config';
+require("dotenv").config({ path: __dirname + '/../../.env' });
 
 const express = require("express");
 
@@ -14,7 +14,7 @@ const auth = (require, result, next) => {
     const header = require.headers["authorization"];
 
     if(!header) {
-        return result.status(401).send({Acces: `Denied`});
+        return result.status(401).send({Access: `Denied`});
     }
 
     try {
@@ -29,5 +29,6 @@ const auth = (require, result, next) => {
 router.post('/register', login.registerUser);
 router.post('/login', login.loginUser);
 router.post('/user-data', endpoints.addUserData);
+router.get('/users', auth, endpoints.getUsers);
 
 module.exports = router;

@@ -1,7 +1,8 @@
 import AuthData from "./../models/auth_data";
-import "dotenv/config";
+require("dotenv").config({ path: __dirname + '/../../.env' });
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+
 
 exports.registerUser = (require, result, next) => {
   const data = {
@@ -50,7 +51,7 @@ exports.loginUser = (require, result, next) => {
               expiresIn: "7d"
             }
           );
-          result.json({ token: token, id: user.id });
+          result.json({ token: token });
         } else {
           result.status(400).json({ error: "Wrong password" });
         }

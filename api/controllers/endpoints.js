@@ -1,5 +1,5 @@
 import UserData from "./../models/user_data";
-
+import AuthData from "./../models/auth_data";
 import Sequelize from "sequelize";
 
 exports.addUserData = (require, result, next) => {
@@ -8,7 +8,6 @@ exports.addUserData = (require, result, next) => {
   const lastname = require.body.lastname;
   const gender = require.body.gender;
   const birthday = require.body.birthday;
-  const fav_animal = require.body.fav_animal;
 
   UserData.create({
     id: id,
@@ -16,7 +15,6 @@ exports.addUserData = (require, result, next) => {
     lastname: lastname,
     gender: gender,
     birthday: birthday,
-    fav_animal: fav_animal,
   })
     .then((out) => {
       result.status(200).json({ Created: out });
@@ -25,3 +23,17 @@ exports.addUserData = (require, result, next) => {
       result.status(400).json({ error: error });
     });
 };
+
+exports.getUsers = async (require, result, next) => {
+  const mail = await AuthData.findOne({
+    attributes: ['mail'],
+    where: {id: require.user.id}
+  });
+
+  if(!mail) {
+    result.status(400).send("Mail not found");
+  } else {
+    result.status(200).send(mail);
+  }
+  // console.log(require.user.id);
+}

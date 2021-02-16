@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 
 import './blocs/auth/auth_bloc.dart';
 import './blocs/login/login_bloc.dart';
@@ -15,7 +16,9 @@ import './pages/pages.dart';
 import './services/auth_service.dart';
 import './config/colors.dart';
 
-void main() async {
+Future main() async {
+  await DotEnv.load(fileName: ".env");
+
   Bloc.observer = SimpleBlocObserver();
   runApp(
     MyApp(),

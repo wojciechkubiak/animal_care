@@ -43,6 +43,7 @@ dependencies:
   toggle_switch: ^0.1.8
   font_awesome_flutter: ^8.11.0
   convert: ^2.1.1
+  flutter_dotenv: ^3.1.0
 
 dev_dependencies:
   flutter_test:
@@ -62,3 +63,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - .env

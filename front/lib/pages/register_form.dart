@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:validators/sanitizers.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../config/colors.dart';
 import '../widgets/forms/input.dart';
@@ -57,7 +57,7 @@ class _RegisterFormState extends State<RegisterForm> {
   Future<void> _showDialog(BuildContext context) async {
     Alert(
       context: context,
-      title: "Tworzenie konta",
+      title: "Konto stworzone",
       content: Padding(
         padding: EdgeInsets.only(top: 32),
         child: Spinner(),
@@ -67,7 +67,7 @@ class _RegisterFormState extends State<RegisterForm> {
           color: CustomColor.mainAccent,
           onPressed: () => Navigator.pop(context),
           child: Text(
-            "Anuluj",
+            "Zaloguj",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
         )
@@ -95,11 +95,11 @@ class _RegisterFormState extends State<RegisterForm> {
     return userData.toJson();
   }
 
-  Future<http.Response> _createUser(Future<Map<String, dynamic>> data) async {
+  Future<http.Response> _createUser(LoginBloc loginBloc) async {
     final response = await http.post(
-      Uri.https('animalcareapi.herokuapp.com', 'register'),
+      Uri.http('${env['IP']}:3000', 'register'),
       headers: <String, String>{
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
         'id': this._id,
@@ -107,8 +107,29 @@ class _RegisterFormState extends State<RegisterForm> {
         'password': this._password,
       }),
     );
-    print(response.statusCode);
+    if (response.statusCode == 200) {
+      // loginBloc.add(LoginInitialShow());
+      // _showDialog(context);
+      _loginUser(loginBloc);
+    }
+    // return response;
+  }
 
+  Future<http.Response> _loginUser(LoginBloc loginBloc) async {
+    final response = await http.post(
+      Uri.http('192.168.1.215:3000', 'login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'email': this._email,
+        'password': this._password,
+      }),
+    );
+    if (response.statusCode == 200) {
+      var responseBody = jsonDecode(response.body);
+      print(responseBody["token"]);
+    }
     return response;
   }
 
@@ -306,8 +327,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             // print(_temp)
                             print(_registerDataJSON);
                             print(_userDataJSON);
-                            _showDialog(context);
-                            _createUser(_registerData());
+                            _createUser(loginBloc);
                           },
                           child: Text(
                             'ZAREJESTRUJ',

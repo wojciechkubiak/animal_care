@@ -25,10 +25,6 @@ const UserData = sequelize_connect.define(
     birthday: {
       type: Sequelize.DATEONLY,
       allowNull: false,
-    },
-    fav_animal: {
-      type: Sequelize.TEXT,
-      allowNull: false
     }
   },
   {

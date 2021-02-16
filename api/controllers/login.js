@@ -5,13 +5,14 @@ const bcrypt = require("bcrypt");
 
 exports.registerUser = (require, result, next) => {
   const data = {
-    mail: require.body.mail,
+    id: require.body.id,
+    mail: require.body.email,
     password: require.body.password
   };
 
   AuthData.findOne({
     where: {
-      mail: require.body.mail,
+      mail: require.body.email,
     },
   })
     .then(() => {
@@ -36,7 +37,7 @@ exports.registerUser = (require, result, next) => {
 exports.loginUser = (require, result, next) => {
   AuthData.findOne({
     where: {
-      mail: require.body.mail,
+      mail: require.body.email,
     }
   })
     .then((user) => {

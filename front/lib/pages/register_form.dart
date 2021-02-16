@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:validators/sanitizers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +13,8 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../widgets/spinner/spinner.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+import 'package:convert/convert.dart';
 
 class RegisterForm extends StatefulWidget {
   @override
@@ -24,19 +28,26 @@ class _RegisterFormState extends State<RegisterForm> {
   String _firstname;
   String _lastname;
   String _gender = "M";
-  String _birthdate;
 
   int _genderIndex = 0;
 
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate = DateTime.utc(1990, 1, 1);
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(1960),
-      lastDate: DateTime(2022),
-    );
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1960),
+        lastDate: DateTime(2022),
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+              data: ThemeData.light().copyWith(
+                primaryColor: CustomColor.mainAccent, //Head background
+                accentColor: CustomColor.mainAccent, //selection color
+                //dialogBackgroundColor: Colors.white,//Background color
+              ),
+              child: child);
+        });
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
@@ -79,9 +90,26 @@ class _RegisterFormState extends State<RegisterForm> {
       firstname: this._firstname,
       lastname: this._lastname,
       gender: this._gender,
-      birthdate: this._birthdate,
+      birthdate: DateFormat('yyyy-MM-dd').format(this.selectedDate),
     );
     return userData.toJson();
+  }
+
+  Future<http.Response> _createUser(Future<Map<String, dynamic>> data) async {
+    final response = await http.post(
+      Uri.https('animalcareapi.herokuapp.com', 'register'),
+      headers: <String, String>{
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'id': this._id,
+        'email': this._email,
+        'password': this._password,
+      }),
+    );
+    print(response.statusCode);
+
+    return response;
   }
 
   @override
@@ -237,7 +265,9 @@ class _RegisterFormState extends State<RegisterForm> {
                                   spreadRadius: 1,
                                   blurRadius: 12,
                                   offset: Offset(
-                                      0, 3), // changes position of shadow
+                                    0,
+                                    3,
+                                  ),
                                 ),
                               ],
                             ),
@@ -277,6 +307,7 @@ class _RegisterFormState extends State<RegisterForm> {
                             print(_registerDataJSON);
                             print(_userDataJSON);
                             _showDialog(context);
+                            _createUser(_registerData());
                           },
                           child: Text(
                             'ZAREJESTRUJ',

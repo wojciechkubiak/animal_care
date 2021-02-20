@@ -24,55 +24,61 @@ class Auth extends StatelessWidget {
         // if (state is Registered) return RegisterConfirmation();
         // if (state is ForgotPassword) return PasswordForgotten();
         if (state is LoginInitial)
-          return Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/bg.jpg"),
-                      fit: BoxFit.cover,
-                      alignment: Alignment.topCenter),
-                ),
-              ),
-              SingleChildScrollView(
-                padding: EdgeInsets.symmetric(vertical: 25),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 35, bottom: 78),
-                      height: 154,
-                      width: 154,
-                      child: Image.asset(
-                        'assets/images/logo.png',
-                      ),
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            color: Colors.white,
+            child: Center(
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(top: 54),
+                    padding: EdgeInsets.only(
+                      top: 72,
+                      bottom: 20,
+                      left: 32,
+                      right: 32,
                     ),
-                    Container(
-                      child: Column(children: [
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     // color: Colors.grey.withOpacity(0.3),
+                        //     spreadRadius: 5,
+                        //     blurRadius: 7,
+                        //     offset: Offset(0, 3), // changes position of shadow
+                        //   ),
+                        // ],
+                        borderRadius: BorderRadius.circular(40)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("Zaloguj",
+                            style: TextStyle(
+                              fontSize: 36,
+                              color: Colors.black54,
+                            )),
+                        SizedBox(height: 32),
                         Input(
-                          labelText: 'Email',
-                          labelColor: Colors.white,
-                          fillColor: Colors.white10,
-                          borderColor: Colors.white70,
-                          node: node,
-                          horizontalPadding: 30,
-                        ),
+                            labelText: 'Email',
+                            labelColor: Colors.black45,
+                            textColor: Colors.black54,
+                            fillColor: CustomColor.secondaryAccent,
+                            borderColor: Colors.white,
+                            node: node,
+                            changeHandler: () {}),
                         Input(
-                          labelText: 'Hasło',
-                          labelColor: Colors.white,
-                          fillColor: Colors.white10,
-                          borderColor: Colors.white70,
-                          obscure: true,
-                          node: node,
-                          horizontalPadding: 30,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                            labelText: 'Hasło',
+                            labelColor: Colors.black45,
+                            textColor: Colors.black54,
+                            fillColor: CustomColor.secondaryAccent,
+                            borderColor: Colors.white,
+                            obscure: true,
+                            node: node,
+                            changeHandler: () {}),
                         Container(
-                          margin: EdgeInsets.only(bottom: 30),
+                          padding: EdgeInsets.symmetric(vertical: 30),
                           child: RaisedButton(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 50, vertical: 15),
@@ -89,6 +95,7 @@ class Auth extends StatelessWidget {
                         ),
                         RichText(
                           text: TextSpan(
+                            style: TextStyle(color: CustomColor.mainAccent),
                             children: [
                               TextSpan(text: 'Nie masz konta? '),
                               TextSpan(
@@ -101,12 +108,36 @@ class Auth extends StatelessWidget {
                             ],
                           ),
                         )
-                      ]),
-                    )
-                  ],
-                ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(top: 15),
+                    child: Container(
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: CustomColor.mainAccent,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.2),
+                            spreadRadius: 1,
+                            blurRadius: 12,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.pets_rounded,
+                        size: 54,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           );
         return SplashScreen();
       },

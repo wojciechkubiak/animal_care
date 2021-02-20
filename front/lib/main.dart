@@ -66,13 +66,6 @@ class _MyAppState extends State<MyApp> {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           home: Scaffold(
-            // appBar: PreferredSize(
-            //   preferredSize: Size.fromHeight(0),
-            //   // child: AppBar(
-            //   //   elevation: 0,
-            //   //   backgroundColor: Colors.black,
-            //   // ),
-            // ),
             body: Theme(
               data: Theme.of(context).copyWith(
                 primaryColor: Color(0xFFFF3661), //color of the main banner

@@ -65,12 +65,13 @@ class _MyAppState extends State<MyApp> {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
+          color: Colors.white,
           home: Scaffold(
             body: Theme(
               data: Theme.of(context).copyWith(
-                primaryColor: Color(0xFFFF3661), //color of the main banner
-                accentColor: Color(
-                    0xFFFF3661), //color of circle indicating the selected date
+                primaryColor: CustomColor.mainAccent, //color of the main banner
+                accentColor: CustomColor
+                    .secondaryAccent, //color of circle indicating the selected date
                 buttonTheme: ButtonThemeData(
                     textTheme: ButtonTextTheme
                         .accent //color of the text in the button "OK/CANCEL"
@@ -78,7 +79,7 @@ class _MyAppState extends State<MyApp> {
               ),
               child: BlocBuilder<AuthBloc, AuthState>(
                 builder: (context, state) {
-                  // if (state is AuthAuthentication) return Home();
+                  if (state is AuthAuthentication) return Home();
                   if (state is AuthNotAuthentication) return Auth();
                   if (state is AuthSplashScreen) return SplashScreen();
                   return SplashScreen();

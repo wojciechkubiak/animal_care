@@ -163,8 +163,8 @@ class _RegisterFormState extends State<RegisterForm> {
                     padding: EdgeInsets.only(
                       top: 72,
                       bottom: 20,
-                      left: 32,
-                      right: 32,
+                      left: 20,
+                      right: 20,
                     ),
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -238,42 +238,39 @@ class _RegisterFormState extends State<RegisterForm> {
                             })
                           },
                         ),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        ToggleSwitch(
-                          minWidth: 90.0,
-                          minHeight: 70.0,
-                          initialLabelIndex: _genderIndex,
-                          cornerRadius: 20.0,
-                          activeFgColor: Colors.white,
-                          inactiveBgColor: CustomColor.secondaryAccent,
-                          inactiveFgColor: Colors.white,
-                          labels: ['', '', ''],
-                          icons: [
-                            FontAwesomeIcons.mars,
-                            FontAwesomeIcons.venus,
-                            FontAwesomeIcons.transgender
-                          ],
-                          iconSize: 30.0,
-                          activeBgColors: [
-                            CustomColor.mainAccent,
-                            CustomColor.mainAccent,
-                            CustomColor.mainAccent
-                          ],
-                          onToggle: (index) {
-                            const genderList = ['Male', 'Female', 'Other'];
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20.0),
+                          child: ToggleSwitch(
+                            minWidth: 90.0,
+                            minHeight: 70.0,
+                            initialLabelIndex: _genderIndex,
+                            cornerRadius: 20.0,
+                            activeFgColor: Colors.white,
+                            inactiveBgColor: CustomColor.secondaryAccent,
+                            inactiveFgColor: Colors.white,
+                            labels: ['', '', ''],
+                            icons: [
+                              FontAwesomeIcons.mars,
+                              FontAwesomeIcons.venus,
+                              FontAwesomeIcons.transgender
+                            ],
+                            iconSize: 30.0,
+                            activeBgColors: [
+                              CustomColor.mainAccent,
+                              CustomColor.mainAccent,
+                              CustomColor.mainAccent
+                            ],
+                            onToggle: (index) {
+                              const genderList = ['Male', 'Female', 'Other'];
 
-                            // setState(() {
-                            _genderIndex = index;
-                            _gender = genderList[index];
-                            // });
-                            // _setGender(index);r
-                            print('switched to: $index');
-                          },
-                        ),
-                        SizedBox(
-                          height: 12,
+                              // setState(() {
+                              _genderIndex = index;
+                              _gender = genderList[index];
+                              // });
+                              // _setGender(index);r
+                              print('switched to: $index');
+                            },
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -307,19 +304,16 @@ class _RegisterFormState extends State<RegisterForm> {
                               child: Text(
                                 DateFormat('dd/MM/yyyy').format(selectedDate),
                                 style: TextStyle(
-                                    fontSize: 20, color: Colors.black54),
+                                    fontSize: 20, color: Colors.black45),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 12,
-                        ),
                         Container(
-                          margin: EdgeInsets.only(top: 24),
+                          margin: EdgeInsets.only(top: 36),
                           child: RaisedButton(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 15),
+                                horizontal: 70, vertical: 15),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
                             color: CustomColor.mainAccent,

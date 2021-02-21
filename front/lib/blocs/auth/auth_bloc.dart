@@ -52,12 +52,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<AuthState> _mapAppLoadedToState(AuthLoaded event) async* {
     yield AuthLoading();
     try {
-      final currentUser = await _AuthService.getCurrent();
-      if (currentUser) {
-        yield AuthAuthentication();
-      } else {
-        yield AuthNotAuthentication();
-      }
+      // final currentUser = await _AuthService.getCurrent();
+      // if (currentUser) {
+      yield AuthAuthentication();
+      // } else {
+      // yield AuthNotAuthentication();
+      // }
     } catch (e) {
       // yield AuthFailure(message: e.message ?? 'An unknown error occurred');
     }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/login/login_bloc.dart';
+import '../blocs/auth/auth_bloc.dart';
 import '../models/models.dart';
 import './pages.dart';
 import '../config/colors.dart';
@@ -12,6 +13,10 @@ class Auth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginBloc = BlocProvider.of<LoginBloc>(context);
+
+    // temporary
+    final authBloc = BlocProvider.of<AuthBloc>(context);
+
     final node = FocusScope.of(context);
 
     return BlocConsumer<LoginBloc, LoginState>(
@@ -36,8 +41,8 @@ class Auth extends StatelessWidget {
                     padding: EdgeInsets.only(
                       top: 72,
                       bottom: 20,
-                      left: 32,
-                      right: 32,
+                      left: 20,
+                      right: 20,
                     ),
                     decoration: BoxDecoration(
                         color: Colors.white,
@@ -81,11 +86,13 @@ class Auth extends StatelessWidget {
                           padding: EdgeInsets.symmetric(vertical: 30),
                           child: RaisedButton(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 50, vertical: 15),
+                                horizontal: 70, vertical: 15),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0)),
                             color: CustomColor.mainAccent,
-                            onPressed: () => print('Zaloguj'),
+                            //temporary
+                            onPressed: () => authBloc.add(AuthLoaded()),
+                            // ^
                             child: Text(
                               'ZALOGUJ',
                               style:

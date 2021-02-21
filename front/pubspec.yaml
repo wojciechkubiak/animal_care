@@ -48,6 +48,8 @@ dependencies:
   image_sequence_animator: ^1.0.10
   lottie: ^0.7.0+1
   google_fonts: ^1.1.2
+  liquid_ui: ^1.0.0+9
+  shrink_sidemenu: ^1.0.0+3
 
 dev_dependencies:
   flutter_test:
